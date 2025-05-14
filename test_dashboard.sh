@@ -13,7 +13,7 @@ if ! command -v stress-ng &> /dev/null; then
 
     if [ "$(id -u)" -eq 0 ]; then
 	if command -v apt &> /dev/null; then
-		apt update && sudo apt install -y stress-ng
+		apt update && apt install -y stress-ng
 	elif command -v pacman &> /dev/null; then
 		pacman -Sy --noconfirm stress-ng
 	elif command -v dnf &> /dev/null; then

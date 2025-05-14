@@ -21,7 +21,7 @@ chmod +x test_dashboard.sh
 ./test_dashboard.sh
 ```
 
-## Clean you system
+## Clean your system
 
 ```bash
 chmod +x cleanup.sh 

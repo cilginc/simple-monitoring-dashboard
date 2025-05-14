@@ -8,23 +8,40 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 if ! command -v stress-ng &> /dev/null; then
+
     echo -e "${RED}Installing stress-ng.${NC}"
 
-    # Paket yöneticisini tespit et ve yükle
-    if command -v apt &> /dev/null; then
-        sudo apt update && sudo apt install -y stress-ng
-    elif command -v pacman &> /dev/null; then
-        sudo pacman -Sy --noconfirm stress-ng
-    elif command -v dnf &> /dev/null; then
-        sudo dnf install -y stress-ng
-    elif command -v zypper &> /dev/null; then
-        sudo zypper install -y stress-ng
+    if [ "$(id -u)" -eq 0 ]; then
+	if command -v apt &> /dev/null; then
+		apt update && sudo apt install -y stress-ng
+	elif command -v pacman &> /dev/null; then
+		pacman -Sy --noconfirm stress-ng
+	elif command -v dnf &> /dev/null; then
+		dnf install -y stress-ng
+	elif command -v zypper &> /dev/null; then
+		zypper install -y stress-ng
+	else
+		echo -e "${RED}Install stress-ng yourself.${NC}"
+		exit 1
+	fi
+    elif command -v sudo &> /dev/null; then
+	if command -v apt &> /dev/null; then
+		sudo apt update && sudo apt install -y stress-ng
+	elif command -v pacman &> /dev/null; then
+		sudo pacman -Sy --noconfirm stress-ng
+	elif command -v dnf &> /dev/null; then
+		sudo dnf install -y stress-ng
+	elif command -v zypper &> /dev/null; then
+		sudo zypper install -y stress-ng
+	else
+		echo -e "${RED}Install stress-ng yourself.${NC}"
+		exit 1
+	fi
     else
-        echo -e "${RED}❌ Install stress-ng yourself.${NC}"
+        echo -e "${RED}Unsupported system for this script.${NC}"
         exit 1
     fi
-
-    # Yükleme sonrası tekrar kontrol et
+    
     if ! command -v stress-ng &> /dev/null; then
         echo -e "${RED}Installation Failed.${NC}"
         exit 1

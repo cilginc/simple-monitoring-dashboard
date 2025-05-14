@@ -14,3 +14,16 @@ This script configured to do:
 - Install `stable` versions
 - Disabled Telemetry
 
+## Test your system
+
+```bash
+chmod +x test_dashboard.sh
+./test_dashboard.sh
+```
+
+## Clean you system
+
+```bash
+chmod +x cleanup.sh 
+./cleanup.sh
+```

@@ -14,6 +14,8 @@ This script configured to do:
 - Install `stable` versions
 - Disabled Telemetry
 
+Access the dashboard on [localhost:19999](http://localhost:19999/)
+
 ## Test your system
 
 ```bash
